@@ -1,0 +1,97 @@
+version: 2
+
+models:
+  - name: stg_region
+    description: "Geographic regions containing multiple nations"
+    columns:
+      - name: region_key
+        description: "Unique identifier for each region"
+        tests:
+          - unique
+          - not_null
+      - name: region_name
+        description: "Name of the geographic region"
+        tests:
+          - not_null
+      - name: region_comment
+        description: "Additional comments or notes about the region"
+
+  - name: stg_orders
+    description: "Customer orders containing order details and pricing"
+    columns:
+      - name: order_key
+        description: "Unique identifier for each order"
+        tests:
+          - unique
+          - not_null
+      - name: customer_key
+        description: "Foreign key reference to the customer who placed the order"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customer')
+              field: customer_key
+      - name: total_price
+        description: "Total price of the order including all line items"
+        tests:
+          - not_null
+
+  - name: stg_nation
+    description: "Nations/countries grouped by geographic region"
+    columns:
+      - name: nation_key
+        description: "Unique identifier for each nation"
+        tests:
+          - unique
+          - not_null
+      - name: nation_name
+        description: "Name of the nation/country"
+        tests:
+          - not_null
+      - name: nation_comment
+        description: "Additional comments or notes about the nation"
+      - name: region_key
+        description: "Foreign key reference to the region containing this nation"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_region')
+              field: region_key
+
+  - name: stg_lineitem
+    description: "Individual line items within customer orders"
+    columns:
+      - name: order_key
+        description: "Foreign key reference to the parent order"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_key
+      - name: line_number
+        description: "Line number within the order (starts at 1 for each order)"
+        tests:
+          - not_null
+
+  - name: stg_customer
+    description: "Customer information and details"
+    columns:
+      - name: customer_key
+        description: "Unique identifier for each customer"
+        tests:
+          - unique
+          - not_null
+      - name: customer_name
+        description: "Full name of the customer"
+        tests:
+          - not_null
+
+# Additional tests for composite keys and business rules
+tests:
+  - name: unique_lineitem_per_order
+    description: "Ensure each line number is unique within an order"
+    sql: |
+      select order_key, line_number, count(*)
+      from {{ ref('stg_lineitem') }}
+      group by order_key, line_number
+      having count(*) > 1

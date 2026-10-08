@@ -1,0 +1,17 @@
+[2024-03-18T08:21:00.064+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_dag.extract_weather_data manual__2024-03-18T08:15:48.434653+00:00 [queued]>
+[2024-03-18T08:21:00.075+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_dag.extract_weather_data manual__2024-03-18T08:15:48.434653+00:00 [queued]>
+[2024-03-18T08:21:00.076+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 2
+[2024-03-18T08:21:00.104+0000] {taskinstance.py:2217} INFO - Executing <Task(SimpleHttpOperator): extract_weather_data> on 2024-03-18 08:15:48.434653+00:00
+[2024-03-18T08:21:00.109+0000] {standard_task_runner.py:60} INFO - Started process 13406 to run task
+[2024-03-18T08:21:00.118+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'weather_dag', 'extract_weather_data', 'manual__2024-03-18T08:15:48.434653+00:00', '--job-id', '22', '--raw', '--subdir', 'DAGS_FOLDER/w2.py', '--cfg-path', '/tmp/tmp8v6rl31w']
+[2024-03-18T08:21:00.119+0000] {standard_task_runner.py:88} INFO - Job 22: Subtask extract_weather_data
+[2024-03-18T08:21:00.209+0000] {task_command.py:423} INFO - Running <TaskInstance: weather_dag.extract_weather_data manual__2024-03-18T08:15:48.434653+00:00 [running]> on host ip-172-31-30-152.ec2.internal
+[2024-03-18T08:21:00.311+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='weather_dag' AIRFLOW_CTX_TASK_ID='extract_weather_data' AIRFLOW_CTX_EXECUTION_DATE='2024-03-18T08:15:48.434653+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-03-18T08:15:48.434653+00:00'
+[2024-03-18T08:21:00.312+0000] {http.py:169} INFO - Calling HTTP method
+[2024-03-18T08:21:00.317+0000] {base.py:83} INFO - Using connection ID 'weathermap_api' for task execution.
+[2024-03-18T08:21:00.339+0000] {base.py:83} INFO - Using connection ID 'weathermap_api' for task execution.
+[2024-03-18T08:21:00.446+0000] {http.py:208} INFO - {"coord":{"lon":-122.6762,"lat":45.5234},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":285.08,"feels_like":284.34,"temp_min":281.42,"temp_max":288.02,"pressure":1021,"humidity":77},"visibility":10000,"wind":{"speed":2.68,"deg":355,"gust":5.81},"clouds":{"all":0},"dt":1710749670,"sys":{"type":2,"id":2008548,"country":"US","sunrise":1710771387,"sunset":1710814842},"timezone":-25200,"id":5746545,"name":"Portland","cod":200}
+[2024-03-18T08:21:00.467+0000] {taskinstance.py:1149} INFO - Marking task as SUCCESS. dag_id=weather_dag, task_id=extract_weather_data, execution_date=20240318T081548, start_date=20240318T082100, end_date=20240318T082100
+[2024-03-18T08:21:00.488+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-03-18T08:21:00.502+0000] {logging_mixin.py:188} WARNING - /home/ubuntu/air_venv/lib/python3.10/site-packages/airflow/models/baseoperator.py:1201 AirflowProviderDeprecationWarning: Call to deprecated class SimpleHttpOperator. (Class `SimpleHttpOperator` is deprecated and will be removed in a future release. Please use `HttpOperator` instead.)
+[2024-03-18T08:21:00.513+0000] {taskinstance.py:3312} INFO - 1 downstream tasks scheduled from follow-on schedule check

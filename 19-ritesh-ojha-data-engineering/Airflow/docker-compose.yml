@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  sleek-airflow:
+    &airflow-common
+    image: apache/airflow:latest
+
+
+    environment:
+      &airflow-common-env
+      AIRFLOW_CORE_EXECUTOR: LocalExecutor
+      AIRFLOW_CORE_LOAD_EXAMPLES: 'true'
+      AIRFLOW__CORE__TEST_CONNECTION: 'Enabled' 
+
+    volumes:
+      - ./airflow:/opt/airflow
+
+    ports:
+      - "8080:8080"
+
+    command: airflow standalone

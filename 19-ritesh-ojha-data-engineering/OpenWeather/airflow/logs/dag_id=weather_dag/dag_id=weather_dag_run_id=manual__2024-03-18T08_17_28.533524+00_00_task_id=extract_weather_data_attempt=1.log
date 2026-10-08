@@ -1,0 +1,20 @@
+ip-172-31-30-152.ec2.internal
+*** Found local files:
+***   * /home/ubuntu/airflow/logs/dag_id=weather_dag/run_id=manual__2024-03-18T08:17:28.533524+00:00/task_id=extract_weather_data/attempt=1.log
+[2024-03-18T08:17:38.578+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_dag.extract_weather_data manual__2024-03-18T08:17:28.533524+00:00 [queued]>
+[2024-03-18T08:17:38.585+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_dag.extract_weather_data manual__2024-03-18T08:17:28.533524+00:00 [queued]>
+[2024-03-18T08:17:38.586+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 2
+[2024-03-18T08:17:38.605+0000] {taskinstance.py:2217} INFO - Executing <Task(SimpleHttpOperator): extract_weather_data> on 2024-03-18 08:17:28.533524+00:00
+[2024-03-18T08:17:38.610+0000] {standard_task_runner.py:60} INFO - Started process 12069 to run task
+[2024-03-18T08:17:38.616+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'weather_dag', 'extract_weather_data', 'manual__2024-03-18T08:17:28.533524+00:00', '--job-id', '16', '--raw', '--subdir', 'DAGS_FOLDER/w2.py', '--cfg-path', '/tmp/tmpip1ipg1j']
+[2024-03-18T08:17:38.617+0000] {standard_task_runner.py:88} INFO - Job 16: Subtask extract_weather_data
+[2024-03-18T08:17:38.656+0000] {task_command.py:423} INFO - Running <TaskInstance: weather_dag.extract_weather_data manual__2024-03-18T08:17:28.533524+00:00 [running]> on host ip-172-31-30-152.ec2.internal
+[2024-03-18T08:17:38.724+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='weather_dag' AIRFLOW_CTX_TASK_ID='extract_weather_data' AIRFLOW_CTX_EXECUTION_DATE='2024-03-18T08:17:28.533524+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-03-18T08:17:28.533524+00:00'
+[2024-03-18T08:17:38.725+0000] {http.py:169} INFO - Calling HTTP method
+[2024-03-18T08:17:38.736+0000] {base.py:83} INFO - Using connection ID 'weathermap_api' for task execution.
+[2024-03-18T08:17:38.800+0000] {base.py:83} INFO - Using connection ID 'weathermap_api' for task execution.
+[2024-03-18T08:17:38.917+0000] {http.py:208} INFO - {"coord":{"lon":-122.6762,"lat":45.5234},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":285.08,"feels_like":284.34,"temp_min":281.42,"temp_max":288.02,"pressure":1021,"humidity":77},"visibility":10000,"wind":{"speed":2.68,"deg":355,"gust":5.81},"clouds":{"all":0},"dt":1710749670,"sys":{"type":2,"id":2008548,"country":"US","sunrise":1710771387,"sunset":1710814842},"timezone":-25200,"id":5746545,"name":"Portland","cod":200}
+[2024-03-18T08:17:38.937+0000] {taskinstance.py:1149} INFO - Marking task as SUCCESS. dag_id=weather_dag, task_id=extract_weather_data, execution_date=20240318T081728, start_date=20240318T081738, end_date=20240318T081738
+[2024-03-18T08:17:38.988+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-03-18T08:17:39.001+0000] {logging_mixin.py:188} WARNING - /home/ubuntu/air_venv/lib/python3.10/site-packages/airflow/models/baseoperator.py:1201 AirflowProviderDeprecationWarning: Call to deprecated class SimpleHttpOperator. (Class `SimpleHttpOperator` is deprecated and will be removed in a future release. Please use `HttpOperator` instead.)
+[2024-03-18T08:17:39.014+0000] {taskinstance.py:3312} INFO - 1 downstream tasks scheduled from follow-on schedule check

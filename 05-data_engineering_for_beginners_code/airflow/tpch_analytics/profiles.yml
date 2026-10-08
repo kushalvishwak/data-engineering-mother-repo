@@ -1,0 +1,10 @@
+tpch_analytics:
+  target: local
+  outputs:
+    local:
+      type: spark
+      method: session
+      schema: prod_db
+      host: localhost
+      
+   

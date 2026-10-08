@@ -1,0 +1,13 @@
+# Raw build conversation — local only, contains personal context
+_meta/session-excerpt.md
+
+# Obsidian per-machine UI state (which files were open, pane layout)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Obsidian local caches
+.obsidian/cache
+.trash/
+
+# OS noise
+.DS_Store

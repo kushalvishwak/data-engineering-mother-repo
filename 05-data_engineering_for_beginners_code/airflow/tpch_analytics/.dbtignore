@@ -1,0 +1,14 @@
+temp/
+scratch/
+*.tmp
+*.log
+.DS_Store
+__pycache__/
+*.pyc
+node_modules/
+.git/
+.env
+notebooks/
+data/
+archive/
+.ipynb_checkpoints/

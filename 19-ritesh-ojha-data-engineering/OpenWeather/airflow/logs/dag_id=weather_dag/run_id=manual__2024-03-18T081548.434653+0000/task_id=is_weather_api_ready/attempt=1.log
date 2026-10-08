@@ -1,0 +1,40 @@
+[2024-03-18T08:15:52.838+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_dag.is_weather_api_ready manual__2024-03-18T08:15:48.434653+00:00 [queued]>
+[2024-03-18T08:15:52.845+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_dag.is_weather_api_ready manual__2024-03-18T08:15:48.434653+00:00 [queued]>
+[2024-03-18T08:15:52.845+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 2
+[2024-03-18T08:15:52.865+0000] {taskinstance.py:2217} INFO - Executing <Task(HttpSensor): is_weather_api_ready> on 2024-03-18 08:15:48.434653+00:00
+[2024-03-18T08:15:52.870+0000] {standard_task_runner.py:60} INFO - Started process 10766 to run task
+[2024-03-18T08:15:52.877+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'weather_dag', 'is_weather_api_ready', 'manual__2024-03-18T08:15:48.434653+00:00', '--job-id', '14', '--raw', '--subdir', 'DAGS_FOLDER/w2.py', '--cfg-path', '/tmp/tmpndb1scsv']
+[2024-03-18T08:15:52.877+0000] {standard_task_runner.py:88} INFO - Job 14: Subtask is_weather_api_ready
+[2024-03-18T08:15:52.916+0000] {task_command.py:423} INFO - Running <TaskInstance: weather_dag.is_weather_api_ready manual__2024-03-18T08:15:48.434653+00:00 [running]> on host ip-172-31-30-152.ec2.internal
+[2024-03-18T08:15:52.986+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='airflow@example.com' AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='weather_dag' AIRFLOW_CTX_TASK_ID='is_weather_api_ready' AIRFLOW_CTX_EXECUTION_DATE='2024-03-18T08:15:48.434653+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-03-18T08:15:48.434653+00:00'
+[2024-03-18T08:15:52.987+0000] {http.py:137} INFO - Poking: /data/2.5/weather?q=Portland&APPID=e1cb4f63b4382fbf753f111ef016216c
+[2024-03-18T08:15:52.996+0000] {taskinstance.py:2731} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/ubuntu/air_venv/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 444, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/ubuntu/air_venv/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 414, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/ubuntu/air_venv/lib/python3.10/site-packages/airflow/providers/http/sensors/http.py", line 164, in execute
+    super().execute(context=context)
+  File "/home/ubuntu/air_venv/lib/python3.10/site-packages/airflow/sensors/base.py", line 265, in execute
+    raise e
+  File "/home/ubuntu/air_venv/lib/python3.10/site-packages/airflow/sensors/base.py", line 247, in execute
+    poke_return = self.poke(context)
+  File "/home/ubuntu/air_venv/lib/python3.10/site-packages/airflow/providers/http/sensors/http.py", line 158, in poke
+    raise exc
+  File "/home/ubuntu/air_venv/lib/python3.10/site-packages/airflow/providers/http/sensors/http.py", line 139, in poke
+    response = hook.run(
+  File "/home/ubuntu/air_venv/lib/python3.10/site-packages/airflow/providers/http/hooks/http.py", line 166, in run
+    session = self.get_conn(headers)
+  File "/home/ubuntu/air_venv/lib/python3.10/site-packages/airflow/providers/http/hooks/http.py", line 108, in get_conn
+    conn = self.get_connection(self.http_conn_id)
+  File "/home/ubuntu/air_venv/lib/python3.10/site-packages/airflow/hooks/base.py", line 82, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+  File "/home/ubuntu/air_venv/lib/python3.10/site-packages/airflow/models/connection.py", line 514, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `weathermap_api` isn't defined
+[2024-03-18T08:15:52.999+0000] {taskinstance.py:1149} INFO - Marking task as UP_FOR_RETRY. dag_id=weather_dag, task_id=is_weather_api_ready, execution_date=20240318T081548, start_date=20240318T081552, end_date=20240318T081552
+[2024-03-18T08:15:53.031+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 14 for task is_weather_api_ready (The conn_id `weathermap_api` isn't defined; 10766)
+[2024-03-18T08:15:53.048+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-03-18T08:15:53.078+0000] {logging_mixin.py:188} WARNING - /home/ubuntu/air_venv/lib/python3.10/site-packages/airflow/models/baseoperator.py:1201 AirflowProviderDeprecationWarning: Call to deprecated class SimpleHttpOperator. (Class `SimpleHttpOperator` is deprecated and will be removed in a future release. Please use `HttpOperator` instead.)
+[2024-03-18T08:15:53.122+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,141 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: "Customer dimension table containing customer details enriched with geographic information (nation and region)"
+    columns:
+      - name: customer_key
+        description: "Unique identifier for each customer (primary key)"
+        tests:
+          - unique
+          - not_null
+      - name: customer_name
+        description: "Full name of the customer"
+        tests:
+          - not_null
+      - name: nation_name
+        description: "Name of the nation/country where the customer is located"
+      - name: nation_comment
+        description: "Additional comments or notes about the customer's nation"
+      - name: region_name
+        description: "Name of the geographic region where the customer is located"
+      - name: region_comment
+        description: "Additional comments or notes about the customer's region"
+
+  - name: fct_lineitem
+    description: "Line item fact table containing individual order line details"
+    columns:
+      - name: order_key
+        description: "Foreign key reference to the parent order"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fct_orders')
+              field: order_key
+      - name: line_number
+        description: "Sequential line number within the order (starts at 1 for each order)"
+        tests:
+          - not_null
+
+  - name: fct_orders
+    description: "Order fact table containing order-level metrics and foreign keys"
+    columns:
+      - name: order_key
+        description: "Unique identifier for each order (primary key)"
+        tests:
+          - unique
+          - not_null
+      - name: customer_key
+        description: "Foreign key reference to the customer who placed the order"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_key
+      - name: total_price
+        description: "Total monetary value of the order including all line items"
+        tests:
+          - not_null
+
+  - name: wide_lineitem
+    description: "Wide table version of line items for reporting and analytics purposes"
+    columns:
+      - name: order_key
+        description: "Foreign key reference to the parent order"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fct_orders')
+              field: order_key
+      - name: line_number
+        description: "Sequential line number within the order"
+        tests:
+          - not_null
+
+  - name: wide_orders
+    description: "Wide table combining order facts with customer dimension data for simplified reporting"
+    columns:
+      - name: order_key
+        description: "Unique identifier for each order (primary key)"
+        tests:
+          - unique
+          - not_null
+      - name: total_price
+        description: "Total monetary value of the order"
+        tests:
+          - not_null
+      - name: customer_name
+        description: "Full name of the customer who placed the order"
+        tests:
+          - not_null
+      - name: customer_key
+        description: "Unique identifier for the customer"
+        tests:
+          - not_null
+
+# Additional tests for business rules and data quality
+tests:
+  - name: unique_lineitem_per_order
+    description: "Ensure each line number is unique within an order in fact table"
+    sql: |
+      select order_key, line_number, count(*)
+      from {{ ref('fct_lineitem') }}
+      group by order_key, line_number
+      having count(*) > 1
+
+  - name: unique_lineitem_per_order_wide
+    description: "Ensure each line number is unique within an order in wide table"
+    sql: |
+      select order_key, line_number, count(*)
+      from {{ ref('wide_lineitem') }}
+      group by order_key, line_number
+      having count(*) > 1
+
+  - name: orders_have_positive_total_price
+    description: "Ensure all orders have positive total prices"
+    sql: |
+      select *
+      from {{ ref('fct_orders') }}
+      where total_price <= 0
+
+  - name: wide_orders_have_positive_total_price
+    description: "Ensure all orders in wide table have positive total prices"
+    sql: |
+      select *
+      from {{ ref('wide_orders') }}
+      where total_price <= 0
+
+  - name: customer_dimension_completeness
+    description: "Check for customers without geographic information"
+    sql: |
+      select *
+      from {{ ref('dim_customer') }}
+      where nation_name is null or region_name is null
+
+  - name: wide_orders_customer_consistency
+    description: "Ensure customer information is consistent between wide_orders and dim_customer"
+    sql: |
+      select wo.order_key, wo.customer_key, wo.customer_name, dc.customer_name as dim_customer_name
+      from {{ ref('wide_orders') }} wo
+      left join {{ ref('dim_customer') }} dc on wo.customer_key = dc.customer_key
+      where wo.customer_name != dc.customer_name
