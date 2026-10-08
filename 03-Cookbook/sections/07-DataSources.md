@@ -1,0 +1,259 @@
+
+100 Plus Data Sources Data Science
+===================================
+
+This is a section with links to data sources. During my data engineer coaching we need to find good data sets to work with.
+So, I started this section to make it easier to find good sources.
+
+I've taken these links from articles and blog posts. Why not only link the articles?
+You know, these posts can go away at any time. I want to keep the links to the platforms either way.
+
+I haven't had the chance to check each link myself. Please let me know if something isn't right.
+
+You can find the articles on the bottom of this section to read more. They include even more data sources I haven't had time to add to this list.
+
+
+
+## Contents
+
+- [Student Favorites](07-DataSources.md#Student-Favorites)
+- [Content Marketing](07-DataSources.md#Content-Marketing)
+- [Crime](07-DataSources.md#Crime)
+- [Drugs](07-DataSources.md#Drugs)
+- [Education](07-DataSources.md#Education)
+- [Entertainment](07-DataSources.md#Entertainment)
+- [Environmental And Weather Data](07-DataSources.md#Environmental-And-Weather-Data)
+- [Financial And Economic Data](07-DataSources.md#Financial-And-Economic-Data])
+- [General And Academic](07-DataSources.md#General-And-Academic)
+- [Government And World](07-DataSources.md#Government-And-World)
+- [Health](07-DataSources.md#Health)
+- [Human Rights](07-DataSources.md#Human-Rights)
+- [Labor And Employment Data](07-DataSources.md#Labor-And-Employment-Data)
+- [Politics](07-DataSources.md#Politics)
+- [Retail](07-DataSources.md#Retail)
+- [Social](07-DataSources.md#Social)
+- [Source Articles and Blog Posts](07-DataSources.md#Source-Articles-and-Blog-Posts)
+- [Travel And Transportation](07-DataSources.md#Travel-And-Transportation)
+- [Various Portals](07-DataSources.md#Various-Portals)
+
+## Student Favorites
+
+In my Coaching program my students learn by doing a project. And the foundation of every project is selecting a dataset.
+That can be an API or a file source, depending a lot on the student's goals and interests.
+
+Working out goals for the dataset, figuring out the data modeling, creating the architecture and building it. 
+It's a fun way to learn and get better at Data Engineering. 
+
+Here's a list of my student's favorite datasets and APIs
+
+Building a project? Use my project README template to document it properly: [template-readme.md](../Code%20Examples/template-readme.md)
+
+### Datasets
+
+| Dataset | Description |
+|---------|-------------|
+| [Fraud detection](https://www.kaggle.com/datasets/kartik2112/fraud-detection) | Simulated credit card transactions labeled as fraudulent or legitimate, ideal for classification and imbalanced-data projects. |
+| [Industrial equipment monitoring](https://www.kaggle.com/datasets/dnkumars/industrial-equipment-monitoring-dataset) | Sensor readings from industrial equipment (temperature, pressure, vibration) for predictive maintenance and anomaly detection. |
+| [Energy demand & generation](https://www.kaggle.com/datasets/nicholasjhana/energy-consumption-generation-prices-and-weather?select=weather_features.csv) | Four years of hourly electricity consumption, generation, prices and weather data for Spain, great for time-series forecasting. |
+| [Online Retail](https://www.kaggle.com/datasets/tunguz/online-retail) | Transactional data from a UK online retailer, useful for customer segmentation, market basket and RFM analysis. |
+| [Brazilian E-commerce](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) | Olist's public dataset of 100k+ orders with customers, products, payments, reviews and geolocation for end-to-end analytics. |
+| [Beijing Air Quality](https://www.kaggle.com/datasets/sid321axn/beijing-multisite-airquality-data-set) | Hourly air pollutant readings across multiple Beijing stations with weather data, good for time-series and environmental analysis. |
+| [NYC Taxi](https://www.kaggle.com/datasets/diishasiing/revenue-for-cab-drivers) | New York City taxi trip and revenue data for cab drivers, useful for revenue, tipping and time-series analysis. |
+| [E-commerce clickstream & transactions](https://www.kaggle.com/datasets/waqi786/e-commerce-clickstream-and-transaction-dataset) | Simulated online shopping clickstream and transaction data — user sessions, page views, clicks and purchases — good for funnel and behavior analysis. |
+| [IESO Ontario electricity data](https://reports-public.ieso.ca/public/) | Public report files from Ontario's grid operator: electricity demand, generation by fuel type, market prices and more, updated regularly as CSV/XML. |
+| [IoT device temperature readings](https://www.kaggle.com/datasets/atulanandjha/temperature-readings-iot-devices) | Temperature sensor readings from IoT devices with indoor/outdoor tags and timestamps, great for time-series and anomaly detection. |
+| [IoT agriculture 2024](https://www.kaggle.com/datasets/wisam1985/iot-agriculture-2024) | Smart-farming sensor data (soil moisture, temperature, humidity, etc.) for agriculture monitoring and IoT analytics projects. |
+
+### APIs
+
+| API | Description |
+|-----|-------------|
+| [Bike sharing Bluebikes](https://bluebikes.com/system-data) | Trip and station data for Boston's Bluebikes bike-share system, including GBFS real-time feeds and downloadable trip history. |
+| [Bike sharing Divvy Bikes](https://divvybikes.com/system-data) | Trip and station data for Chicago's Divvy bike-share system, with GBFS real-time feeds and historical ride files. |
+| [Weather API](https://www.weatherapi.com/docs/) | Weather API with current conditions, forecasts, historical data and astronomy; generous free tier. |
+| [Bluesky API](https://docs.bsky.app/docs/advanced-guides/api-directory) | API for the Bluesky social network (AT Protocol): posts, profiles, feeds and social graph data. |
+| [Guardian news API](https://open-platform.theguardian.com/) | Access to The Guardian's articles, tags and sections; great for text and news analysis, free with an API key. |
+| [Football API](https://www.api-football.com/) | Football (soccer) data API: fixtures, live scores, standings, teams, players and statistics across many leagues. |
+| [HSL Helsinki public transport](https://www.hsl.fi/en/hsl/open-data) | Open transit data for the Helsinki region: routes, schedules, GTFS feeds, real-time vehicle positions and a routing API. |
+| [Digitransit map API](https://digitransit.fi/en/developers/apis/4-map-api/background-map/) | Background map and vector tiles API for building transit and mobility maps (Finland/Helsinki region). |
+| [Open-Meteo](https://open-meteo.com/) | Free open-source weather API with forecasts, historical data and air quality, no API key required. |
+| [Finnish Meteorological Institute open data](https://en.ilmatieteenlaitos.fi/open-data-sets-available) | Weather observations, forecasts and climate data for Finland, served via open WFS/download APIs. |
+| [OpenWeatherMap](https://openweathermap.org/price) | Weather API with current conditions, forecasts and historical data via the One Call API; free tier plus paid plans. |
+| [SMARD German electricity market API](https://github.com/bundesAPI/smard-api/tree/main) | API for Germany's electricity market data: generation, consumption and prices from the Bundesnetzagentur (documentation in German). |
+
+
+## General And Academic
+
+- [Amazon Public Data Sets](https://registry.opendata.aws/)
+- [Datasets Subreddit](https://www.reddit.com/r/datasets)
+- [Enigma Public](https://public.enigma.com/)
+- [FiveThirtyEight](http://fivethirtyeight.com/)
+- [Google Scholar](http://scholar.google.com/)
+- [Pew Research](http://www.pewresearch.org/)
+- [The Upshot by New York Times](http://www.nytimes.com/section/upshot)
+- [UNData](http://data.un.org/)
+
+## Content Marketing
+
+- [Buffer](https://blog.bufferapp.com/)
+- [Content Marketing Institute](http://contentmarketinginstitute.com/about/)
+- [HubSpot](http://www.hubspot.com/marketing-statistics)
+- [Moz](https://moz.com/blog)
+
+## Crime
+
+- [Bureau of Justice Statistics](http://www.bjs.gov/index.cfm?ty=dca)
+- [FBI Crime Statistics](https://www.fbi.gov/stats-services/crimestats)
+- [National Archive of Criminal Justice Data](https://www.icpsr.umich.edu/icpsrweb/NACJD/)
+- [Uniform Crime Reporting Statistics](https://crime-data-explorer.fr.cloud.gov/)
+
+## Drugs
+
+- [Drug Data and Database by First Databank](http://www.fdbhealth.com/)
+- [Drug War Facts](http://www.drugwarfacts.org/)
+- [National Institute on Drug Abuse](https://www.drugabuse.gov/related-topics/trends-statistics)
+- [U.S. Food and Drug Administration](http://www.fda.gov/Drugs/InformationOnDrugs/ucm079750.htm)
+- [United Nations Office on Drugs and Crime](https://www.unodc.org/unodc/en/data-and-analysis/)
+
+## Education
+
+- [Education Data by the World Bank](http://data.worldbank.org/topic/education)
+- [Education Data by Unicef](http://data.unicef.org/education/overview.html)
+- [National Center for Education Statistics](https://nces.ed.gov/)
+
+## Entertainment
+
+- [Academic Rights Press](http://www.academicrightspress.com/entertainment/music)
+- [BFI Film Forever](http://www.bfi.org.uk/education-research/film-industry-statistics-research)
+- [BLS: Arts, Entertainment, and Recreation](http://www.bls.gov/iag/tgs/iag71.htm)
+- [IFPI](http://www.ifpi.org/global-statistics.php)
+- [Million Song Dataset](https://aws.amazon.com/datasets/million-song-dataset/)
+- [Statista: Film Industry](http://www.statista.com/topics/964/film/)
+- [Statista: Music Industry](http://www.statista.com/topics/1639/music/)
+- [Statista: Video Game Industry](http://www.statista.com/topics/868/video-games/)
+- [The Numbers](http://www.the-numbers.com/)
+
+## Environmental And Weather Data
+
+- [Environmental Protection Agency](https://www.epa.gov/data)
+- [International Energy Agency Atlas](https://www.iea.org/data-and-statistics?country=WORLD&fuel=Energy%20supply&indicator=TPESbySource)
+- [National Center for Environmental Health](http://www.cdc.gov/nceh/data.htm)
+- [National Climatic Data Center](http://www.ncdc.noaa.gov/data-access/quick-links#loc-clim)
+- [National Weather Service](http://www.weather.gov/help-past-weather)
+- [Weather Underground](https://www.wunderground.com/)
+- [WeatherBase](http://www.weatherbase.com/)
+
+## Financial And Economic Data
+
+- [Federal Reserve Economic Database](https://fred.stlouisfed.org/)
+- [Financial Data Finder at OSU](./) - Missing link.
+- [Global Financial Data](https://www.globalfinancialdata.com/index.html)
+- [Google Finance](https://www.google.com/finance)
+- [Google Public Data Explorer](http://www.google.com/publicdata/directory)
+- [IMF Economic Data](https://data.imf.org/?sk=388dfa60-1d26-4ade-b505-a05a558d9a42)
+- [National Bureau of Economic Research](http://www.nber.org/data/)
+- [OpenCorporates](https://opencorporates.com/)
+- [The Atlas of Economic Complexity](http://atlas.cid.harvard.edu/)
+- [U.S. Bureau of Economic Analysis](http://www.bea.gov/)
+- [U.S. Securities and Exchange Commission](https://www.sec.gov/dera/data/financial-statement-data-sets.html)
+- [UN Comtrade Database](https://comtrade.un.org/labs/)
+- [Visualizing Economics](http://visualizingeconomics.com/)
+- [World Bank Doing Business Database](http://www.doingbusiness.org/rankings)
+- [World Bank Open Data](http://data.worldbank.org/)
+
+## Government And World
+
+- [Data.gov](http://www.data.gov/)
+- [European Union Open Data Portal](http://data.europa.eu/euodp/en/data/)
+- [Gapminder](https://www.gapminder.org/data/)
+- [Land Matrix (Transnational Land Database)](http://landmatrix.org/en/)
+- [OECD Aid Database](http://www.oecd.org/dac/financing-sustainable-development/development-finance-data/)
+- [Open Data Network](http://www.opendatanetwork.com/)
+- [The CIA World Factbook](https://www.cia.gov/the-world-factbook/)
+- [The World Bank’s World Development Indicators](http://data.worldbank.org/data-catalog/world-development-indicators)
+- [U.S. Census Bureau](http://www.census.gov/)
+- [UNDP’s Human Development Index](http://hdr.undp.org/en/data)
+
+## Health
+
+- [America’s Health Rankings](http://www.americashealthrankings.org/)
+- [Centers for Disease Control and Prevention](http://www.cdc.gov/datastatistics/)
+- [Health & Social Care Information Centre](http://www.hscic.gov.uk/home)
+- [Health Services Research Information Central](https://www.nlm.nih.gov/hsrinfo/datasites.html)
+- [HealthData.gov](https://www.healthdata.gov/)
+- [Medicare Hospital Quality](https://data.medicare.gov/data/hospital-compare#)
+- [MedicinePlus](https://www.nlm.nih.gov/medlineplus/healthstatistics.html)
+- [National Center for Health Statistics](http://www.cdc.gov/nchs/)
+- [SEER Cancer Incidence](http://seer.cancer.gov/faststats/selections.php?series=cancer)
+- [World Health Organization](http://www.who.int/en/)
+
+## Human Rights
+
+- [Amnesty International](https://www.amnesty.org/en/search/?q=&documentType=Annual+Report)
+- [Human Rights Data Analysis Group](https://hrdag.org/)
+- [The Armed Conflict Database by Uppsala University](http://www.pcr.uu.se/research/UCDP/)
+
+## Labor And Employment Data
+
+- [Bureau of Labor Statistics](http://www.bls.gov/)
+- [Department of Labor](https://www.dol.gov/general/topic/statistics/employment)
+- [Employment by U.S. Census](http://www.census.gov/topics/employment.html)
+- [U.S. Small Business Administration](https://www.sba.gov/starting-business/how-start-business/business-data-statistics/employment-statistics)
+
+## Politics
+
+- [California Field Poll](http://dlab.berkeley.edu/data-resources/california-polls)
+- [Crowdpac](https://www.crowdpac.com/)
+- [Gallup](http://www.gallup.com/home.aspx)
+- [Open Secrets](https://www.opensecrets.org/)
+- [Rand State Statistics](http://www.randstatestats.org/us/)
+- [Real Clear Politics](http://guides.lib.berkeley.edu/Intro-to-Political-Science-Research/Stats)
+- [Roper Center for Public Opinion Research](https://ropercenter.cornell.edu/)
+- [US Voter Files](http://voterlist.electproject.org/) Note only some states are free, and most do not allow voter files to be used for commercial purposes - this map allows you to see the rules/cost for each state.
+
+## Retail
+
+- [Love the Sales](https://www.lovethesales.com/press/data-request)
+
+## Social
+
+- [Facebook Graph API](https://developers.facebook.com/docs/graph-api)
+- [Google Trends](http://www.google.com/trends/explore)
+- [SocialMention](./) - Missing link.
+
+## Travel And Transportation
+
+- [Bureau of Transportation Statistics](https://www.bts.gov/browse-statistical-products-and-data)
+- [Monthly Tourism Statistics – U.S. Travelers Overseas](http://travel.trade.gov/research/monthly/departures/)
+- [Search the World](http://www.geoba.se/)
+- [SkiftStats](https://skift.com/skiftx/skiftstats/)
+- [U.S. Travel Association](https://www.ustravel.org/research)
+
+## Various Portals
+
+- [Ckan](https://ckan.org/)
+- [Dataverse](https://dataverse.org/)
+- [DBpedia](https://wiki.dbpedia.org/)
+- [freeCodeCamp Open Data](https://github.com/freeCodeCamp/open-data)
+- [Kaggle](https://www.kaggle.com/datasets)
+- [LODUM](https://lodum.de/)
+- [Open Data Ipact Map](http://opendataimpactmap.org/)
+- [Open Data Kit](https://opendatakit.org/)
+- [Open Data Monitor](https://opendatamonitor.eu/frontend/web/index.php?r=dashboard%2Findex)
+- [Plenar.io](http://plenar.io/)
+- [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php)
+- [Yelp Open Datasets](https://www.yelp.com/dataset)
+
+
+## Source Articles and Blog Posts
+
+
+- [100+ of the Best Free Data Sources For Your Next Project](https://www.columnfivemedia.com/100-best-free-data-sources-infographic)
+- [15 Great Free Data Sources for 2016](https://medium.com/@Infogram/15-great-free-data-sources-for-2016-25cb455db257)
+- [20 Awesome Sources of Free Data](https://www.searchenginejournal.com/free-data-sources/302601/#close)
+- [30+ Free Data Sources Every Company Should Be Aware Of](https://www.bernardmarr.com/default.asp?contentID=960)
+- [50 Amazing Free Data Sources You Should Know](https://infogram.com/blog/free-data-sources/)
+- [50 Best Open Data Sources Ready to be Used Right Now](https://learn.g2.com/open-data-sources)
+- [70 Amazing Free Data Sources You Should Know](https://www.kdnuggets.com/2017/12/big-data-free-sources.html)
+- [Big Data: 33 Brilliant And Free Data Sources Anyone Can Use](https://www.forbes.com/sites/bernardmarr/2016/02/12/big-data-35-brilliant-and-free-data-sources-for-2016/#527557ffb54d)
+- [These Are The Best Free Open Data Sources Anyone Can Use](https://www.freecodecamp.org/news/https-medium-freecodecamp-org-best-free-open-data-sources-anyone-can-use-a65b514b0f2d/)

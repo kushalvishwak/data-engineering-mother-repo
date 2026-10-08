@@ -1,40 +1,20 @@
-# Roadmap
+# Repository collection maintenance roadmap
 
-This is a staged curriculum and implementation backlog, not a claim that every vendor service has a local emulator or that every proposed deployment is production-ready. Completed examples are runnable locally; service-specific work remains explicitly opt-in.
+This repository is a collection of independently authored upstream projects. The numbered folders follow the PDF list, not a unified course or tested technology sequence.
 
-## Curriculum and implementation
+## Current organization
 
-- [x] Establish the 20-topic learning path and nine-project progression.
-- [x] Map the 20 repositories from the supplied PDF to original curriculum areas without importing their contents.
-- [x] Provide a deterministic, tested standard-library batch pipeline.
-- [x] Provide local tested examples for bounded API pagination, SCD Type 2 changes, and row-level contract checks.
-- [ ] Expand Python packaging, profiling, concurrency, and durable cursor examples.
-- [ ] Add SQL labs for query-plan reading, transaction isolation, incremental deletes, and dialect differences.
-- [ ] Add dimensional-model exercises for late-arriving facts, inferred members, and restatement.
-- [ ] Add generated-data Spark labs that compare plans and measure skew, shuffle, cache, and AQE behavior.
+- [x] List all 20 requested projects in the PDF order.
+- [x] Preserve each project's source identity and upstream revision.
+- [x] Store seven license-detected projects as file snapshots with their license notices.
+- [x] Keep the remaining 13 projects as pinned Git submodules because a repository-level license was not detected.
+- [x] Exclude upstream `.env` and `.env.*` runtime configuration files from imported snapshots.
+- [ ] Obtain explicit permission or a clear license from the remaining upstream authors before considering a file snapshot for those projects.
 
-## Platform depth
+## Maintenance
 
-- [ ] Add isolated, opt-in Databricks notebooks for Delta transaction history, CDF, Auto Loader, and Unity Catalog.
-- [ ] Add reviewed Azure and AWS deployment examples with least-privilege identities, network boundaries, and cost estimates.
-- [ ] Add Snowflake labs for pruning, streams/tasks, role design, and warehouse sizing.
-- [ ] Add orchestration adapters showing retry classification, backfills, concurrency limits, and idempotent task contracts.
-- [ ] Add architecture options for Tableau and Power BI serving, semantic models, and workload isolation.
-
-## Reliability, security, and architecture
-
-- [ ] Add failure injection and measured recovery drills to all project briefs.
-- [ ] Add reusable run metadata, lineage, alert routing, and SLO examples.
-- [ ] Add data-contract compatibility checks and schema migration exercises.
-- [ ] Add architecture decision records comparing batch, CDC, streaming, and lakehouse alternatives.
-- [ ] Add threat-model and privacy-review checklists to deployment-oriented projects.
-
-## Delivery and maintenance
-
-- [x] Add CI for the dependency-free Python examples and tests.
-- [ ] Add focused lint/type checks when their configuration and dependencies are adopted.
-- [ ] Complete project implementations incrementally; retain clear scope and runtime labels.
-- [ ] Add scoring rubrics and sample solution outlines to senior interview cases.
-- [ ] Review vendor claims, external links, runtimes, and license notices on a documented cadence.
-
-Vendor behavior and editions change. For service-specific expansions, record the product, feature, runtime/version, source documentation, and review date; never infer production guarantees from a local simulation.
+- Review each upstream license, notices, and third-party content before changing a project's representation.
+- Keep source URLs, import revisions, license status, and representation current in [SOURCES.md](SOURCES.md).
+- Update submodule commits only after reviewing upstream changes.
+- Do not combine projects, remove upstream notices, or present external material as original work.
+- Keep root-level collection guidance separate from the licenses and contribution practices of individual projects.

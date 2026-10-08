@@ -1,0 +1,35 @@
+name: analytics-engineering
+
+services:
+  postgres:
+    image: postgres:16.3
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: greenery
+    volumes:
+      - postgres-data-volume:/var/lib/postgresql/data
+      - ./setup/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./setup/data:/data
+    ports:
+      - 5432:5432
+
+  sqlpad:
+    image: sqlpad/sqlpad:7.4.4
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      SQLPAD_ADMIN: admin@admin.io
+      SQLPAD_ADMIN_PASSWORD: admin
+      SQLPAD_CONNECTIONS__pgdb__name: Greenery
+      SQLPAD_CONNECTIONS__pgdb__driver: postgres
+      SQLPAD_CONNECTIONS__pgdb__host: postgres
+      SQLPAD_CONNECTIONS__pgdb__database: greenery
+      SQLPAD_CONNECTIONS__pgdb__username: postgres
+      SQLPAD_CONNECTIONS__pgdb__password: postgres
+    ports:
+      - 3000:3000
+
+volumes:
+  postgres-data-volume:

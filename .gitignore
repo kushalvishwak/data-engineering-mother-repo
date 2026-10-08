@@ -22,7 +22,6 @@ secrets.*
 *.tfstate
 *.tfstate.*
 .databricks/
-/14-projects/01-basic-batch-pipeline/output/
 target/
 dist/
 build/

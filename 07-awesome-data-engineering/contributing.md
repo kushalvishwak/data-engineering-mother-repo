@@ -1,0 +1,40 @@
+# Contribution Guidelines
+
+Please ensure your pull request adheres to the following guidelines:
+
+- Search previous suggestions before making a new one, as yours may be a duplicate.
+- Make sure your list is useful before submitting. That implies it having enough content and every item a good succinct description.
+- Link name or description should only include alphanumeric text, no emojis or images.
+- A link back to this list from yours, so users can discover more lists, would be appreciated.
+- Make an individual pull request for each suggestion.
+- Titles should be [capitalized](http://grammar.yourdictionary.com/capitalization/rules-for-capitalization-in-titles.html).
+- Use the following format: `[List Name](link)`
+- Link additions should be added to the bottom of the relevant category.
+- New categories or improvements to the existing categorization are welcome.
+- Check your spelling and grammar.
+- Make sure your text editor is set to remove trailing whitespace.
+- The pull request and commit should have a useful title.
+
+Thank you for your suggestions!
+
+
+## Inclusion Criteria
+
+This is a curated list, not a directory. New entries should meet the following
+bar. If your submission does not yet, we are glad to look again once it does.
+
+- **On topic.** Data engineering infrastructure and tooling: databases,
+  ingestion, processing, orchestration, storage, quality, and datasets. Not
+  learning sites, interview preparation, general SaaS, or unrelated utilities.
+- **Used by someone other than the author.** Show it: stars, forks, outside
+  contributors, published packages, or tagged releases with a real changelog.
+- **Not brand new.** Projects should be at least 30 days old and still
+  maintained. A burst of commits followed by silence is not maintenance.
+- **Submitted by an established account.** Accounts created to make the
+  submission will be closed without further review.
+- **Described, not sold.** State what the tool does in one sentence. No
+  superlatives, no unverifiable claims ("fastest", "zero false positives").
+- **Licensed, if it is a repository.** Include a license file.
+
+AI-assisted development is fine and increasingly common. What we look for is
+evidence that the project is real and used, whoever or whatever wrote the code.

@@ -1,36 +1,21 @@
 # Contributing
 
-Contributions should be original, technically careful, reproducible, and useful to engineers who operate data systems. Keep the numbered learning sequence stable and preserve the distinction between portable concepts and vendor-specific behavior.
+This repository primarily indexes and organizes work authored by others. Keep source provenance visible, preserve license files and copyright notices, and do not imply that upstream code or documentation is original to this repository.
 
-## Before submitting
+## Collection changes
 
-1. Search the existing material and project briefs; extend the best-fit section instead of creating duplicate explanations.
-2. State assumptions, input/output contracts, failure semantics, security boundaries, and cost drivers where relevant.
-3. Prefer deterministic, dependency-light examples. Label required runtimes, credentials, permissions, and possible billing before any cloud operation.
-4. Add tests for executable behavior. Use synthetic data and do not commit generated outputs.
-5. Cite primary documentation for changing product behavior, with product/runtime context and review date when useful.
-6. External repositories are reference material only. Do not copy code, prose, diagrams, or datasets unless the exact source license permits the intended use; preserve notices and record attribution and license details.
-7. Never include credentials, personal data, proprietary production identifiers, or unredacted logs.
+1. Update [SOURCES.md](SOURCES.md) when a URL, pinned revision, license status, or representation changes.
+2. Keep unlicensed or license-unclear repositories as Git submodules unless the copyright holder grants permission or a clear compatible license is added upstream.
+3. For permitted snapshots, preserve the complete upstream license and notice files. Review nested or third-party content independently.
+4. Do not copy secrets or environment-specific configuration; use upstream `.env.example` files where provided.
+5. Do not modify files inside a submodule as though they were parent-repository files. Submit changes upstream or maintain a properly licensed fork.
+6. Keep root-level documentation limited to collection navigation, provenance, and contribution policy.
 
-## Structure and quality
-
-Use the existing numbered top-level sequence. A topic can use `README.md`, `docs/`, `examples/`, `exercises/`, `projects/`, and `tests/` when each folder adds real value; do not create empty scaffolding. Project implementations should explain architecture, flow, decisions, recovery, monitoring, tests, security, and cost. Label examples that need Spark, Databricks, cloud, or warehouse services as platform-dependent and do not imply they were locally verified.
-
-## Local checks
-
-Run the standard-library suites from the repository root:
+## Verify submodules
 
 ```powershell
-python -m unittest discover -s 14-projects/01-basic-batch-pipeline/tests -v
-python -m unittest discover -s 02-python/tests -v
-python -m unittest discover -s 04-data-modeling/tests -v
-python -m unittest discover -s 12-data-quality/tests -v
+git submodule status
+git submodule update --init --recursive
 ```
 
-For project 01's end-to-end sample run:
-
-```powershell
-python 14-projects/01-basic-batch-pipeline/src/run_pipeline.py
-```
-
-CI runs the dependency-free tests on supported Python versions. Add the smallest relevant test to a new executable example and update the run instructions when commands change.
+There is no unified build or test command: each source snapshot and submodule has its own runtime, dependencies, checks, and license terms. Consult that project's own instructions before running its code.

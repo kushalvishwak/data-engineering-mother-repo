@@ -1,0 +1,21 @@
+[project]
+name = "iceberg"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Kan Ouivirach",email = "zkan.cs@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "pyiceberg[pyarrow,sql-sqlite] (>=0.11.1,<0.12.0)",
+    "google-auth (>=2.56.2,<3.0.0)",
+    "google-cloud-storage (>=3.13.0,<4.0.0)"
+]
+
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

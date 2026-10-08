@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "loading-data-to-bigquery-from-local"
+version = "0.1.0"
+description = ""
+authors = ["Kan Ouivirach <zkan.cs@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.2.2"
+pyarrow = "^17.0.0"
+google-cloud-bigquery = "^3.25.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

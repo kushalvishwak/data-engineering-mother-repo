@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "play-with-sentence-transformers"
+version = "0.1.0"
+description = ""
+authors = ["zkan <zkan.cs@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+sentence-transformers = "^4.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

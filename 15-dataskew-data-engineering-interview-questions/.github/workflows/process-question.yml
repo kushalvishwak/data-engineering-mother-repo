@@ -1,0 +1,356 @@
+name: Process New Question Submission
+
+on:
+  issues:
+    types: [opened, labeled]
+  pull_request:
+    types: [closed]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to process'
+        required: true
+        type: number
+
+jobs:
+  process-question:
+    if: |
+      (github.event_name == 'issues' && (
+        contains(github.event.issue.labels.*.name, 'new question') ||
+        contains(github.event.issue.body, '### Question') ||
+        contains(github.event.issue.title, 'New Question:')
+      )) ||
+      github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Parse issue and create question entry
+        id: parse-question
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            // Get issue data - either from event or manual dispatch
+            let issue;
+            if (context.eventName === 'workflow_dispatch') {
+              const issueNumber = context.payload.inputs.issue_number;
+              const issueResponse = await github.rest.issues.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber
+              });
+              issue = issueResponse.data;
+            } else {
+              issue = context.payload.issue;
+            }
+            
+            // Parse the issue body to extract form data
+            const issueBody = issue.body;
+            console.log('Issue body:', issueBody);
+            
+            // Extract form fields using regex patterns
+            const extractField = (fieldName, body) => {
+              // More robust pattern that handles multiline content better
+              const regex = new RegExp(`### ${fieldName}\\s*\\n([\\s\\S]*?)(?=\\n###|$)`, 'i');
+              const match = body.match(regex);
+              return match ? match[1].trim() : '';
+            };
+            
+            const question = extractField('Question', issueBody);
+            const company = extractField('Company', issueBody);
+            const topic = extractField('Primary Topic', issueBody);
+            const interviewStage = extractField('Interview Stage', issueBody);
+            const solution = extractField('Solution/Answer \\(Optional\\)', issueBody);
+            
+            // Validate required fields
+            if (!question || !company || !topic || !interviewStage) {
+              core.setFailed('Missing required fields in the issue');
+              return;
+            }
+            
+            // Create question object (difficulty will be added during review)
+            const questionEntry = {
+              id: Date.now(),
+              question: question,
+              company: company,
+              difficulty: null, // To be assigned during review
+              topic: topic,
+              interviewStage: interviewStage,
+              solution: solution || null,
+              submittedBy: issue.user.login,
+              submittedAt: new Date().toISOString(),
+              issueNumber: issue.number
+            };
+            
+            console.log('Parsed question:', JSON.stringify(questionEntry, null, 2));
+            
+            // Store question data for PR creation (don't write to questions.json yet)
+            // The question will be added to questions.json when the PR is merged with difficulty assigned
+            
+            // Create a temporary file with question data for the PR
+            const tempQuestionFile = `.temp-question-${questionEntry.id}.json`;
+            fs.writeFileSync(tempQuestionFile, JSON.stringify(questionEntry, null, 2));
+            
+            // Set outputs for next steps
+            core.setOutput('question-added', 'true');
+            core.setOutput('question-id', questionEntry.id);
+            core.setOutput('branch-name', `question-${questionEntry.id}`);
+            core.setOutput('temp-file', tempQuestionFile);
+            
+            return questionEntry;
+
+      - name: Create Pull Request
+        if: steps.parse-question.outputs.question-added == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Add new question from issue #${{ github.event_name == 'workflow_dispatch' && github.event.inputs.issue_number || github.event.issue.number }}"
+          title: "Review: New Question from Issue #${{ github.event_name == 'workflow_dispatch' && github.event.inputs.issue_number || github.event.issue.number }}"
+          body: |
+            ## New Question Submission Review
+            
+            **Original Issue:** #${{ github.event_name == 'workflow_dispatch' && github.event.inputs.issue_number || github.event.issue.number }}
+            
+            ### Review Checklist:
+            - [ ] Question is clear and well-formatted
+            - [ ] Topic categorization is correct
+            - [ ] Interview stage is correctly identified
+            - [ ] Solution (if provided) is accurate
+            - [ ] No sensitive or proprietary information
+            
+            ### Difficulty Assignment (Required before merge):
+            **Please add ONE of these labels before merging:**
+            - `difficulty:easy` - Basic concepts, straightforward questions
+            - `difficulty:medium` - Intermediate complexity, requires some thought
+            - `difficulty:hard` - Complex, requires deep understanding
+            
+            > ⚠️ **Important**: You must add a difficulty label before merging, or the question will be added without a difficulty level.
+            
+            ### Actions:
+            - **Approve**: Merge this PR to add the question to the collection
+            - **Request Changes**: Comment on specific issues and close this PR
+            
+            ---
+            *This PR was automatically created from issue #${{ github.event_name == 'workflow_dispatch' && github.event.inputs.issue_number || github.event.issue.number }}*
+          branch: question-${{ steps.parse-question.outputs.question-id }}
+          delete-branch: true
+          labels: |
+            question-review
+            auto-generated
+
+      - name: Add comment to original issue
+        if: steps.parse-question.outputs.question-added == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueNumber = context.eventName === 'workflow_dispatch' 
+              ? context.payload.inputs.issue_number 
+              : context.issue.number;
+            const submissionComment = '✅ Thank you for your submission!\n\n' +
+              'Your question has been automatically processed and a pull request has been created for review.\n\n' +
+              'The question will be reviewed by maintainers and added to the collection once approved.\n\n' +
+              '**Next Steps:**\n' +
+              '- Maintainers will review the question for accuracy and appropriateness\n' +
+              '- The difficulty level will be assigned during review\n' +
+              '- You\'ll be notified when the question is approved and merged\n\n' +
+              'Thanks for contributing to the community! 🚀';
+              
+            github.rest.issues.createComment({
+              issue_number: issueNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: submissionComment
+            });
+
+      - name: Add review label to issue
+        if: steps.parse-question.outputs.question-added == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueNumber = context.eventName === 'workflow_dispatch' 
+              ? context.payload.inputs.issue_number 
+              : context.issue.number;
+            github.rest.issues.addLabels({
+              issue_number: issueNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['under-review']
+            });
+
+  finalize-question:
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'question-review')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Pull latest main branch
+        run: |
+          git fetch origin main
+          git checkout main
+          git pull origin main
+
+      - name: Add question to collection with assigned difficulty
+        id: add-question
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            // Get difficulty from PR labels
+            const prLabels = context.payload.pull_request.labels.map(label => label.name);
+            console.log('PR Labels:', prLabels);
+            
+            let difficulty = null;
+            if (prLabels.includes('difficulty:easy')) {
+              difficulty = 'easy';
+            } else if (prLabels.includes('difficulty:medium')) {
+              difficulty = 'medium';
+            } else if (prLabels.includes('difficulty:hard')) {
+              difficulty = 'hard';
+            }
+            
+            console.log('Assigned difficulty:', difficulty);
+            
+            if (!difficulty) {
+              core.setFailed('⚠️ No difficulty label found. Please add a difficulty:easy, difficulty:medium, or difficulty:hard label to the PR.');
+              return;
+            }
+            
+            // Extract issue number from PR title to find the correct temp file
+            const prTitle = context.payload.pull_request.title;
+            const issueNumberMatch = prTitle.match(/#(\d+)/);
+            
+            if (!issueNumberMatch) {
+              core.setFailed('Could not extract issue number from PR title');
+              return;
+            }
+            
+            const issueNumber = parseInt(issueNumberMatch[1]);
+            
+            // Find the temp question file for this specific issue
+            const files = fs.readdirSync('.');
+            const tempFile = files.find(file => {
+              if (file.startsWith('.temp-question-') && file.endsWith('.json')) {
+                try {
+                  const tempData = JSON.parse(fs.readFileSync(file, 'utf8'));
+                  return tempData.issueNumber === issueNumber;
+                } catch (e) {
+                  return false;
+                }
+              }
+              return false;
+            });
+            
+            if (!tempFile) {
+              core.setFailed(`Could not find temporary question file for issue #${issueNumber}`);
+              return;
+            }
+            
+            console.log('Found temp file:', tempFile);
+            
+            // Read the question data
+            const questionData = JSON.parse(fs.readFileSync(tempFile, 'utf8'));
+            
+            // Update with difficulty and review info
+            questionData.difficulty = difficulty;
+            questionData.reviewedAt = new Date().toISOString();
+            questionData.reviewedBy = context.payload.pull_request.merged_by.login;
+            
+            console.log('Final question data:', JSON.stringify(questionData, null, 2));
+            
+            // Read existing questions
+            let questions = [];
+            try {
+              const questionsData = fs.readFileSync('questions.json', 'utf8');
+              questions = JSON.parse(questionsData);
+            } catch (error) {
+              console.log('No existing questions file or empty file, starting with empty array');
+              questions = [];
+            }
+            
+            // Add new question
+            questions.push(questionData);
+            
+            // Write updated questions back to file
+            fs.writeFileSync('questions.json', JSON.stringify(questions, null, 2));
+            
+            // Clean up temp file
+            fs.unlinkSync(tempFile);
+            
+            // Clean up any other orphaned temp files
+            const allTempFiles = files.filter(file => file.startsWith('.temp-question-') && file.endsWith('.json'));
+            allTempFiles.forEach(file => {
+              if (file !== tempFile) {
+                try {
+                  fs.unlinkSync(file);
+                  console.log('Cleaned up orphaned temp file:', file);
+                } catch (e) {
+                  console.log('Could not clean up temp file:', file);
+                }
+              }
+            });
+            
+            console.log('✅ Question added to collection successfully');
+            
+            // Set output for use in next step
+            core.setOutput('issue-number', questionData.issueNumber);
+            core.setOutput('difficulty', difficulty);
+
+      - name: Commit final question to repository
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          # Remove any remaining temp files from git
+          git rm -f .temp-question-*.json 2>/dev/null || true
+          git add questions.json
+          git commit -m "Add reviewed question with difficulty assignment"
+          git push
+
+      - name: Comment on original issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueNumber = '${{ steps.add-question.outputs.issue-number }}';
+            const difficulty = '${{ steps.add-question.outputs.difficulty }}';
+            
+            const commentBody = '🎉 **Question Approved and Added!**\n\n' +
+              'Your question has been successfully reviewed and added to the interview questions collection.\n\n' +
+              '**Final Details:**\n' +
+              '- **Difficulty Level:** ' + difficulty.charAt(0).toUpperCase() + difficulty.slice(1) + '\n' +
+              '- **Reviewed by:** @' + context.payload.pull_request.merged_by.login + '\n' +
+              '- **Added on:** ' + new Date().toLocaleDateString() + '\n\n' +
+              'Thank you for contributing to the community! Your question will help others prepare for their interviews. 🚀';
+            
+            await github.rest.issues.createComment({
+              issue_number: parseInt(issueNumber),
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: commentBody
+            });
+
+            // Close the issue as completed
+            await github.rest.issues.update({
+              issue_number: parseInt(issueNumber),
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'closed',
+              labels: ['completed', 'added-to-collection']
+            });

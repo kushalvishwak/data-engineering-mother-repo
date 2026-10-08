@@ -1,0 +1,13 @@
+version: 2
+
+unit_tests:
+  - name: test_is_valid_email_address
+    model: my_users
+    given:
+      - input: source('greenery', 'users')
+        rows:
+          - {email: cool@example.com}
+          - {email: coolmail.com}
+    expect:
+      rows:
+        - {email: cool@example.com}
