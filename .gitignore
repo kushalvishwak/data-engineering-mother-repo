@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+coverage.xml
+htmlcov/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.*
+
+# Platform/build artifacts
+.terraform/
+*.tfstate
+*.tfstate.*
+.databricks/
+/14-projects/01-basic-batch-pipeline/output/
+target/
+dist/
+build/
+*.egg-info/
+.DS_Store
+Thumbs.db

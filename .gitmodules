@@ -1,0 +1,80 @@
+[submodule "external-repositories/01-data-engineering-zoomcamp"]
+	path = external-repositories/01-data-engineering-zoomcamp
+	url = https://github.com/DataTalksClub/data-engineering-zoomcamp.git
+	shallow = true
+[submodule "external-repositories/02-data-engineer-handbook"]
+	path = external-repositories/02-data-engineer-handbook
+	url = https://github.com/DataExpert-io/data-engineer-handbook.git
+	shallow = true
+[submodule "external-repositories/03-cookbook"]
+	path = external-repositories/03-cookbook
+	url = https://github.com/andkret/Cookbook.git
+	shallow = true
+[submodule "external-repositories/04-data-engineering-practice"]
+	path = external-repositories/04-data-engineering-practice
+	url = https://github.com/danielbeach/data-engineering-practice.git
+	shallow = true
+[submodule "external-repositories/05-data_engineering_for_beginners_code"]
+	path = external-repositories/05-data_engineering_for_beginners_code
+	url = https://github.com/josephmachado/data_engineering_for_beginners_code.git
+	shallow = true
+[submodule "external-repositories/06-efficient_data_processing_spark"]
+	path = external-repositories/06-efficient_data_processing_spark
+	url = https://github.com/josephmachado/efficient_data_processing_spark.git
+	shallow = true
+[submodule "external-repositories/07-awesome-data-engineering"]
+	path = external-repositories/07-awesome-data-engineering
+	url = https://github.com/igorbarinov/awesome-data-engineering.git
+	shallow = true
+[submodule "external-repositories/08-data-engineering-roadmap"]
+	path = external-repositories/08-data-engineering-roadmap
+	url = https://github.com/ErdemOzgen/Data-Engineering-Roadmap.git
+	shallow = true
+[submodule "external-repositories/09-data_engineer_roadmap"]
+	path = external-repositories/09-data_engineer_roadmap
+	url = https://github.com/anshlambagit/Data_Engineer_Roadmap.git
+	shallow = true
+[submodule "external-repositories/10-data-engineering-projects"]
+	path = external-repositories/10-data-engineering-projects
+	url = https://github.com/garage-education/data-engineering-projects.git
+	shallow = true
+[submodule "external-repositories/11-data-engineering-projects"]
+	path = external-repositories/11-data-engineering-projects
+	url = https://github.com/alanchn31/Data-Engineering-Projects.git
+	shallow = true
+[submodule "external-repositories/12-e2e-data-engineering"]
+	path = external-repositories/12-e2e-data-engineering
+	url = https://github.com/airscholar/e2e-data-engineering.git
+	shallow = true
+[submodule "external-repositories/13-data-engineering-system-design"]
+	path = external-repositories/13-data-engineering-system-design
+	url = https://github.com/Rahul-Patel321/data-engineering-system-design.git
+	shallow = true
+[submodule "external-repositories/14-data-engineering-interview-questions"]
+	path = external-repositories/14-data-engineering-interview-questions
+	url = https://github.com/OBenner/data-engineering-interview-questions.git
+	shallow = true
+[submodule "external-repositories/15-data-engineering-interview-questions"]
+	path = external-repositories/15-data-engineering-interview-questions
+	url = https://github.com/dataskew-io/data-engineering-interview-questions.git
+	shallow = true
+[submodule "external-repositories/16-data-engineering-bootcamp"]
+	path = external-repositories/16-data-engineering-bootcamp
+	url = https://github.com/zkan/data-engineering-bootcamp.git
+	shallow = true
+[submodule "external-repositories/17-data-engineer-roadmap"]
+	path = external-repositories/17-data-engineer-roadmap
+	url = https://github.com/harish303118/data-engineer-roadmap.git
+	shallow = true
+[submodule "external-repositories/18-dataengineeringproject"]
+	path = external-repositories/18-dataengineeringproject
+	url = https://github.com/damklis/DataEngineeringProject.git
+	shallow = true
+[submodule "external-repositories/19-data-engineering"]
+	path = external-repositories/19-data-engineering
+	url = https://github.com/ritesh-ojha/Data-Engineering.git
+	shallow = true
+[submodule "external-repositories/20-data-engineering-bible"]
+	path = external-repositories/20-data-engineering-bible
+	url = https://github.com/J-Suyash/data-engineering-bible.git
+	shallow = true
